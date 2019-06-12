@@ -17,4 +17,9 @@ if g:sharpenup_codeactions
   \ g:sharpenup_codeactions_glyph
 endif
 
+" Default highlight groups for sharpenup#statusline#Build()
+highlight default link SharpenUpLoading WarningMsg
+highlight default link SharpenUpReady Directory
+highlight default link SharpenUpDead NonText
+
 " vim:et:sw=2:sts=2
