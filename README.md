@@ -6,6 +6,7 @@ This plugin is tightly integrated with [OmniSharp-vim](https://github.com/OmniSh
 
 * [Code actions available](#code-actions-available) flag in the sign column
 * Customisable [statusline](#statusline) function for displaying server status
+* Default [mappings](#mappings)
 
 ## 💡 Code actions available
 
@@ -103,3 +104,14 @@ let g:sharpenup_statusline_opts = { 'Highlight': 0 }
 ```
 
 Highlighting has been disabled in `g:sharpenup_statusline_opts` in this example, meaning that the default statusline texts will be displayed ("O#: Loading...", "O#", "O#: Not running") in the statusline colours.
+
+This will work fine but the statusline will only be updated when Vim asks for it, which typically happens on cursor movements and changes etc. To have the server status updated immediately on changes, add this `autocmd`:
+
+```vim
+augroup lightline_integration
+  autocmd!
+  autocmd User OmniSharpStarted,OmniSharpReady,OmniSharpStopped call lightline#update()
+augroup END
+```
+
+## Mappings
