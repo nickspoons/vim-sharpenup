@@ -115,3 +115,59 @@ augroup END
 ```
 
 ## Mappings
+
+By default, default OmniSharp-vim mappings will be created in .cs buffers.
+This can be globally disabled like this:
+
+```vim
+let g:sharpenup_create_mappings = 0
+```
+
+The full list of default mappings is as follows:
+
+```vim
+nmap <silent> <buffer> gd <Plug>(omnisharp_go_to_definition)
+nmap <silent> <buffer> <LocalLeader>osfu <Plug>(omnisharp_find_usages)
+nmap <silent> <buffer> <LocalLeader>osfi <Plug>(omnisharp_find_implementations)
+nmap <silent> <buffer> <LocalLeader>ospd <Plug>(omnisharp_preview_definition)
+nmap <silent> <buffer> <LocalLeader>ospi <Plug>(omnisharp_preview_implementations)
+
+nmap <silent> <buffer> <LocalLeader>ost <Plug>(omnisharp_type_lookup)
+nmap <silent> <buffer> <LocalLeader>osd <Plug>(omnisharp_documentation)
+
+nmap <silent> <buffer> <LocalLeader>osfs <Plug>(omnisharp_find_symbol)
+
+nmap <silent> <buffer> <LocalLeader>osfx <Plug>(omnisharp_fix_usings)
+nmap <silent> <buffer> <C-\> <Plug>(omnisharp_signature_help)
+imap <silent> <buffer> <C-\> <Plug>(omnisharp_signature_help)
+
+nmap <silent> <buffer> [[ <Plug>(omnisharp_navigate_up)
+nmap <silent> <buffer> ]] <Plug>(omnisharp_navigate_down)
+
+nmap <silent> <buffer> <LocalLeader>osgcc <Plug>(omnisharp_global_code_check)
+
+nmap <silent> <buffer> <LocalLeader>osca <Plug>(omnisharp_code_actions)
+xmap <silent> <buffer> <LocalLeader>osca <Plug>(omnisharp_code_actions)
+
+nmap <silent> <buffer> <LocalLeader>osnm <Plug>(omnisharp_rename)
+
+nmap <silent> <buffer> <LocalLeader>os= <Plug>(omnisharp_code_format)
+
+nmap <silent> <buffer> <LocalLeader>osre <Plug>(omnisharp_restart_server)
+nmap <silent> <buffer> <LocalLeader>osst <Plug>(omnisharp_start_server)
+nmap <silent> <buffer> <LocalLeader>ossp <Plug>(omnisharp_stop_server)
+```
+
+The mappings all use a common prefix, except for these exceptions: `gd`, `<C-\>`, `[[`, `]]`
+
+The default prefix is `<LocalLeader>os`.
+The default local-leader in Vim is `\` which means that the default prefixed mappings all begin with `\os`.
+This can be overridden either by changing `maplocalleader`, or setting a different prefix:
+
+```vim
+" Example mapping: '<Space>osfi'
+let maplocalleader = "\<Space>"
+
+" Example mapping: ',fi'
+let g:sharpenup_map_prefix = ','
+```
