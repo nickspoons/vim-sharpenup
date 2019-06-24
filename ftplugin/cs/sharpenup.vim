@@ -35,6 +35,8 @@ if get(g:, 'sharpenup_create_mappings', 1)
 
   call s:map('n', s:pre . 'gcc', 'global_code_check')
 
+  call s:map('n', s:pre . 'hi', 'highlight_types')
+
   call s:map('n', s:pre . 'ca', 'code_actions')
   call s:map('x', s:pre . 'ca', 'code_actions')
 
