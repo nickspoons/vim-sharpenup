@@ -20,13 +20,17 @@ function! sharpenup#statusline#GetStatus() abort
   let job = empty(host) ? '' :  OmniSharp#proc#GetJob(host.sln_or_dir)
   if type(job) != v:t_dict
     let status.State = s:t_dead
-    let status.Text = s:statusOpts.TextDead
+    let status.Text = substitute(s:statusOpts.TextDead, '%s', '-', 'g')
     return status
   endif
 
   let loaded = get(job, 'loaded', 0)
   let status.State = loaded ? s:t_ready : s:t_loading
   let status.Text = loaded ? s:statusOpts.TextReady : s:statusOpts.TextLoading
+  if stridx(status.Text, '%s') >= 0
+    let sod = fnamemodify(host.sln_or_dir, ':t')
+    let status.Text = substitute(status.Text, '%s', sod, 'g')
+  endif
   return status
 endfunction
 

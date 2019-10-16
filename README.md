@@ -54,6 +54,13 @@ A shortcut is to simply assign a text value to `g:sharpenup_statusline_opts`, wh
 let g:sharpenup_statusline_opts = '•'
 ```
 
+To display the solution/directory name of the current OmniSharp server, use
+`%s`, e.g.:
+
+```vim
+let g:sharpenup_statusline_opts = ' O# (%s) '
+```
+
 To change the highlight colours, either:
 
 * assign different highlight groups to be used:
