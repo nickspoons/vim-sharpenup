@@ -48,8 +48,8 @@ if get(g:, 'sharpenup_create_mappings', 1)
   call s:map('n', s:pre . 'st', 'start_server')
   call s:map('n', s:pre . 'sp', 'stop_server')
 
-  call s:map('n', s:pre . 'rt', 'runtest')
-  call s:map('n', s:pre . 'rat', 'runtestsinclass')
+  call s:map('n', s:pre . 'rt', 'run_test')
+  call s:map('n', s:pre . 'rat', 'run_tests_in_class')
 endif
 
 if g:sharpenup_codeactions
