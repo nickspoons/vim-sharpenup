@@ -19,7 +19,7 @@ if get(g:, 'sharpenup_create_mappings', 1)
   call s:map('n', s:pre . 'fu', 'find_usages')
   call s:map('n', s:pre . 'fi', 'find_implementations')
   call s:map('n', s:pre . 'pd', 'preview_definition')
-  call s:map('n', s:pre . 'pi', 'preview_implementations')
+  call s:map('n', s:pre . 'pi', 'preview_implementation')
 
   call s:map('n', s:pre . 't', 'type_lookup')
   call s:map('n', s:pre . 'd', 'documentation')
@@ -49,7 +49,7 @@ if get(g:, 'sharpenup_create_mappings', 1)
   call s:map('n', s:pre . 'sp', 'stop_server')
 
   call s:map('n', s:pre . 'rt', 'run_test')
-  call s:map('n', s:pre . 'rat', 'run_tests_in_class')
+  call s:map('n', s:pre . 'rat', 'run_tests_in_file')
 endif
 
 if g:sharpenup_codeactions
