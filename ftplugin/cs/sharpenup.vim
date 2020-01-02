@@ -50,6 +50,11 @@ if get(g:, 'sharpenup_create_mappings', 1)
 
   call s:map('n', s:pre . 'rt', 'run_test')
   call s:map('n', s:pre . 'rat', 'run_tests_in_file')
+  
+  if g:sharpenup_legacy_csproj_actions
+    execute 'nmap <silent> <buffer>' . s:pre . '<LocalLeader>add :call sharpenup#legacycsproj#AddToProject()<CR>'
+    execute 'nmap <silent> <buffer>' . s:pre . '<LocalLeader>ren :call sharpenup#legacycsproj#RenameInProject()<Left>'
+  endif
 endif
 
 if g:sharpenup_codeactions
@@ -66,11 +71,6 @@ if g:sharpenup_codeactions
   augroup END
 
   let b:undo_ftplugin .= '| execute "autocmd! sharpenup_ftplugin * <buffer>"'
-endif
-
-if g:sharpenup_legacy_csproj_actions
-  nmap <silent> <buffer> <LocalLeader>add :call legacycsproj#AddToProject()<CR>
-  nmap <silent> <buffer> <LocalLeader>ren :call legacycsproj#RenameInProject()<Left>
 endif
 
 " vim:et:sw=2:sts=2
