@@ -68,4 +68,9 @@ if g:sharpenup_codeactions
   let b:undo_ftplugin .= '| execute "autocmd! sharpenup_ftplugin * <buffer>"'
 endif
 
+if g:sharpenup_legacy_csproj_actions
+  nmap <silent> <buffer> <LocalLeader>add :call legacycsproj#AddToProject()<CR>
+  nmap <silent> <buffer> <LocalLeader>ren :call legacycsproj#RenameInProject()<Left>
+endif
+
 " vim:et:sw=2:sts=2
