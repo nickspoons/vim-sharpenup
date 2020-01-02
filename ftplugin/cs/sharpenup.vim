@@ -53,7 +53,7 @@ if get(g:, 'sharpenup_create_mappings', 1)
   
   if g:sharpenup_legacy_csproj_actions
     execute 'nmap <silent> <buffer>' . s:pre . 'add :call sharpenup#legacycsproj#AddToProject()<CR>'
-    execute 'nmap <silent> <buffer>' . s:pre . 'rem :call sharpenup#legacycsproj#RenameInProject()<Left>'
+    execute 'nmap <silent> <buffer>' . s:pre . 'ren :call sharpenup#legacycsproj#RenameInProject()<Left>'
   endif
 endif
 

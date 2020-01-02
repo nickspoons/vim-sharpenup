@@ -169,8 +169,8 @@ nmap <silent> <buffer> <LocalLeader>ossp <Plug>(omnisharp_stop_server)
 If the `g:sharpenup_legacy_csproj_actions` flag is set the following mappings will be set:
 
 ```vim
-nmap <silent> <buffer> <LocalLeader>add :call legacycsproj#AddToProject()<CR>
-nmap <silent> <buffer> <LocalLeader>ren :call legacycsproj#RenameInProject()<Left>
+nmap <silent> <buffer> <LocalLeader>add :call sharpenup#legacycsproj#AddToProject()<CR>
+nmap <silent> <buffer> <LocalLeader>ren :call sharpenup#legacycsproj#RenameInProject()<Left>
 ```
 
 The mappings all use a common prefix, except for these exceptions: `gd`, `<C-\>`, `[[`, `]]`
