@@ -1,1 +1,0 @@
-https://github.com/OmniSharp/omnisharp-vim/wiki/Working-with-older-.csproj-Projects
