@@ -52,8 +52,8 @@ if get(g:, 'sharpenup_create_mappings', 1)
   call s:map('n', s:pre . 'rat', 'run_tests_in_file')
   
   if g:sharpenup_legacy_csproj_actions
-    execute 'nmap <silent> <buffer>' . s:pre . '<LocalLeader>add :call sharpenup#legacycsproj#AddToProject()<CR>'
-    execute 'nmap <silent> <buffer>' . s:pre . '<LocalLeader>ren :call sharpenup#legacycsproj#RenameInProject()<Left>'
+    execute 'nmap <silent> <buffer>' . s:pre . 'add :call sharpenup#legacycsproj#AddToProject()<CR>'
+    execute 'nmap <silent> <buffer>' . s:pre . 'ren :call sharpenup#legacycsproj#RenameInProject()<Left>'
   endif
 endif
 
