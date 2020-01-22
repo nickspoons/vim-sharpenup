@@ -7,6 +7,7 @@ This plugin is tightly integrated with [OmniSharp-vim](https://github.com/OmniSh
 * [Code actions available](#code-actions-available) flag in the sign column
 * Customisable [statusline](#statusline) function for displaying server status
 * Default [mappings](#mappings)
+* Manage file includes in [legacy .csproj](#legacy-csproj-actions) files
 
 ## 💡 Code actions available
 
@@ -20,7 +21,6 @@ A flag is displayed in the sign column to indicate that one or more code actions
 | `g:sharpenup_codeactions_autocmd`        | `'CursorHold'` | Which autocmd to trigger on - can be a comma separated list. Suggestions: `CursorHold`, `CursorMoved`, `BufEnter,CursorMoved` |
 | `g:sharpenup_codeactions_glyph`          | `'💡'`         | Select the character to be used as the sign-column indicator |
 | `g:sharpenup_codeactions_set_signcolumn` | `1`            | `'signcolumn'` will be set to `yes` for .cs buffers          |
-| `g:sharpenup_legacy_csproj_actions`      | `1`            | Add bindings for legacy csproj actions                       | 
 
 ## Statusline
 
@@ -113,7 +113,7 @@ let g:sharpenup_statusline_opts = { 'Highlight': 0 }
 
 Highlighting has been disabled in `g:sharpenup_statusline_opts` in this example, meaning that the default statusline texts will be displayed ("O#: Loading...", "O#", "O#: Not running") in the statusline colours.
 
-This will work fine but the statusline will only be updated when Vim asks for it, which typically happens on cursor movements and changes etc. To have the server status updated immediately on changes, add this `autocmd`:
+This will work fine but the statusline will only be updated when Vim asks for it, which typically happens on cursor movements and changes etc. To have the server status updated immediately when the server status changes, add this `autocmd`:
 
 ```vim
 augroup lightline_integration
@@ -124,7 +124,7 @@ augroup END
 
 ## Mappings
 
-By default, default OmniSharp-vim mappings will be created in .cs buffers.
+By default, vim-sharpenup creates standard OmniSharp-vim mappings in .cs buffers.
 This can be globally disabled like this:
 
 ```vim
@@ -166,13 +166,6 @@ nmap <silent> <buffer> <LocalLeader>osst <Plug>(omnisharp_start_server)
 nmap <silent> <buffer> <LocalLeader>ossp <Plug>(omnisharp_stop_server)
 ```
 
-If the `g:sharpenup_legacy_csproj_actions` flag is set the following mappings will be set:
-
-```vim
-nmap <silent> <buffer> <LocalLeader>add :call sharpenup#legacycsproj#AddToProject()<CR>
-nmap <silent> <buffer> <LocalLeader>ren :call sharpenup#legacycsproj#RenameInProject()<Left>
-```
-
 The mappings all use a common prefix, except for these exceptions: `gd`, `<C-\>`, `[[`, `]]`
 
 The default prefix is `<LocalLeader>os`.
@@ -185,4 +178,23 @@ let maplocalleader = "\<Space>"
 
 " Example mapping: ',fi'
 let g:sharpenup_map_prefix = ','
+```
+
+## Legacy csproj actions
+
+In older .NET Framework projects, all .cs files are listed explicitly in the .csproj file.
+vim-sharpenup provides some functionality for maintaining this style of .csproj file, by adding and renaming referenced .cs files.
+
+The following commands are provided:
+
+- `:SharpenUpAddToProject` add the current .cs file to the .csproj file
+- `:SharpenUpRenameInProject` rename the current .cs file in the .csproj file, e.g. `:SharpenUpRenameInProject NewFilename.cs`
+
+When the `g:sharpenup_map_legacy_csproj_actions` flag is set (it is by default), the following mappings are also created (note that the `g:sharpenup_map_prefix` is used, see [mappings](#mappings)):
+
+```vim
+nmap <silent> <buffer> <LocalLeader>osadd <Plug>(sharpenup_add_to_csproj)
+" Populate the vim command line with the command, waiting for user input:
+" :SharpenUpRenameInProject _
+nnoremap <buffer> <LocalLeader>osren :SharpenUpRenameInProject<Space>
 ```
