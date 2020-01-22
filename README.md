@@ -20,6 +20,7 @@ A flag is displayed in the sign column to indicate that one or more code actions
 | `g:sharpenup_codeactions_autocmd`        | `'CursorHold'` | Which autocmd to trigger on - can be a comma separated list. Suggestions: `CursorHold`, `CursorMoved`, `BufEnter,CursorMoved` |
 | `g:sharpenup_codeactions_glyph`          | `'💡'`         | Select the character to be used as the sign-column indicator |
 | `g:sharpenup_codeactions_set_signcolumn` | `1`            | `'signcolumn'` will be set to `yes` for .cs buffers          |
+| `g:sharpenup_legacy_csproj_actions`      | `1`            | Add bindings for legacy csproj actions                       | 
 
 ## Statusline
 
@@ -163,6 +164,13 @@ nmap <silent> <buffer> <LocalLeader>os= <Plug>(omnisharp_code_format)
 nmap <silent> <buffer> <LocalLeader>osre <Plug>(omnisharp_restart_server)
 nmap <silent> <buffer> <LocalLeader>osst <Plug>(omnisharp_start_server)
 nmap <silent> <buffer> <LocalLeader>ossp <Plug>(omnisharp_stop_server)
+```
+
+If the `g:sharpenup_legacy_csproj_actions` flag is set the following mappings will be set:
+
+```vim
+nmap <silent> <buffer> <LocalLeader>add :call sharpenup#legacycsproj#AddToProject()<CR>
+nmap <silent> <buffer> <LocalLeader>ren :call sharpenup#legacycsproj#RenameInProject()<Left>
 ```
 
 The mappings all use a common prefix, except for these exceptions: `gd`, `<C-\>`, `[[`, `]]`
