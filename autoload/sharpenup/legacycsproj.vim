@@ -48,7 +48,7 @@ function! sharpenup#legacycsproj#AddToProject() abort
     substitute?/?\\?g
     substitute?\\>?/>?g
   endif
-  write
+  silent write
   tabclose
 endfunction
 
@@ -56,15 +56,16 @@ endfunction
 " Pass in a full path relative to the project.
 function! sharpenup#legacycsproj#RenameInProject(newname) abort
   let l:filepath = expand('%:p')
-  let l:filename = expand('%:t')
   let l:project = s:FindProject()
   if !len(l:project) | return | endif
   execute 'silent tabedit' l:project
   call cursor(1, 1)
-  if fnamemodify(l:project, ':h') !=# getcwd()
+  let l:project_dir = fnamemodify(l:project, ':h')
+  if l:project_dir !=# getcwd()
     execute 'lcd' fnamemodify(l:project, ':h')
   endif
   let l:filepath = fnamemodify(l:filepath, ':.')
+  let l:oldname = l:filepath
   if g:OmniSharp_translate_cygwin_wsl || has('win32')
     let l:filepath = substitute(l:filepath, '/', '\\\\', 'g')
   endif
@@ -74,13 +75,23 @@ function! sharpenup#legacycsproj#RenameInProject(newname) abort
     call s:HiEcho('Could not find ' . substitute(l:filepath, '\\\\', '\\', 'g'))
     return
   endif
-  let newname = a:newname
+  let l:newpath = a:newname
   if g:OmniSharp_translate_cygwin_wsl || has('win32')
-    let newname = substitute(a:newname, '/', '\\\\', 'g')
+    let l:newpath = substitute(a:newname, '/', '\\\\', 'g')
   endif
-  execute 'substitute?' . l:filepath . '?' . newname . '?'
-  write
+  execute 'substitute?' . l:filepath . '?' . l:newpath . '?'
+  silent write
   tabclose
+  if get(g:, 'sharpenup_legacy_csproj_rename_callback', '') !=# ''
+    try
+      let CB = function(g:sharpenup_legacy_csproj_rename_callback)
+      call CB(a:newname, l:oldname, l:project_dir)
+    catch /^Vim\%((\a\+)\)\=:\%(E117\):/
+      call s:HiEcho(
+      \ 'g:sharpenup_legacy_csproj_rename_callback function does not exist: '
+      \ . g:sharpenup_legacy_csproj_rename_callback)
+    endtry
+  endif
 endfunction
 
 " Populate the Vim command line with the :SharpenUpRenameInProject command and

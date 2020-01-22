@@ -135,7 +135,7 @@ The mappings all use a common prefix, except for these exceptions: `gd`, `<C-\>`
 
 The full list of mappings is as follows:
 
-| Action                | LHS        | Full default mapping                                                               |
+|Action                 |LHS         |Full default mapping                                                                |
 |-----------------------|------------|------------------------------------------------------------------------------------|
 |Go to definition       |`gd`        |`nmap <silent> <buffer> gd <Plug>(omnisharp_go_to_definition)`                      |
 |Find usages            |prefix+`fu` |`nmap <silent> <buffer> <LocalLeader>osfu <Plug>(omnisharp_find_usages)`            |
@@ -183,7 +183,7 @@ The following commands are provided:
 
 When the `g:sharpenup_map_legacy_csproj_actions` flag is set (it is by default), the following mappings are also created (note that the `g:sharpenup_map_prefix` is used, see [mappings](#mappings)):
 
-| Action                | LHS        | Full default mapping                                                               |
+|Action                 |LHS         |Full default mapping                                                                |
 |-----------------------|------------|------------------------------------------------------------------------------------|
 |Add file to .csproj    |prefix+`xa` |`nmap <silent> <buffer> <LocalLeader>osxa <Plug>(sharpenup_add_to_csproj)`          |
 |Rename file in .csproj |prefix+`xr` |`nmap <silent> <buffer> <LocalLeader>osxr <Plug>(sharpenup_rename_in_csproj)`       |
@@ -192,4 +192,39 @@ The mapping to rename a file populates the vim command line with the `:SharpenUp
 
 ```sh
 :SharpenUpRenameInProject Path/To/NewFileName.cs
+```
+
+The `:SharpenUpRenameInProject` command can be configured to execute a callback function after successfully renaming a file in the .csproj file.
+Here you can script the physical rename of the file to match the name you have just set in the .csproj file.
+
+```vim
+let g:sharpenup_legacy_csproj_rename_callback = 'MoveAfterProjectRename'
+```
+
+The `g:sharpenup_legacy_csproj_rename_callback` variable should be the name of a function which accepts 3 arguments:
+
+* `newname`: The new filename, with path relative to the .csproj file
+* `oldname`: The old filename, with path relative to the .csproj file
+* `project_dir`: The full path to the .csproj parent directory
+
+Example: Rename the file, in a *nix environment:
+
+```vim
+function! MoveAfterProjectRename(newname, oldname, project_dir)
+  call system('mkdir -p ' . a:project_dir . '/' . fnamemodify(a:newname, ':h'))
+  call system('mv ' . a:project_dir . '/' . a:oldname . ' ' . a:project_dir . '/' . a:newname)
+  execute 'edit' a:project_dir . '/' . a:newname
+  bdelete #
+  lcd .
+endfunction
+```
+
+Here's an example that makes use of [vim-eunuch](https://github.com/tpope/vim-eunuch)'s `:Move` command, which takes care of most of the details in the previous example:
+
+```vim
+function! MoveAfterProjectRename(newname, oldname, project_dir)
+  execute 'lcd' a:project_dir
+  execute 'Move' a:newname
+  lcd .
+endfunction
 ```
