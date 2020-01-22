@@ -186,10 +186,10 @@ When the `g:sharpenup_map_legacy_csproj_actions` flag is set (it is by default),
 | Action                | LHS        | Full default mapping                                                               |
 |-----------------------|------------|------------------------------------------------------------------------------------|
 |Add file to .csproj    |prefix+`xa` |`nmap <silent> <buffer> <LocalLeader>osxa <Plug>(sharpenup_add_to_csproj)`          |
-|Rename file in .csproj |prefix+`xr` |`nnoremap <buffer> <LocalLeader>osxr :SharpenUpRenameInProject<Space>`              |
+|Rename file in .csproj |prefix+`xr` |`nmap <silent> <buffer> <LocalLeader>osxr <Plug>(sharpenup_rename_in_csproj)`       |
 
-The mapping to rename a file in the .csproj file populates the vim command line with the `:SharpenUpRenameInProject` command, and is used like this:
+The mapping to rename a file populates the vim command line with the `:SharpenUpRenameInProject` command and the current filename (relative to the .csproj file), and is used like this:
 
 ```sh
-:SharpenUpRenameInProject NewFileName.cs
+:SharpenUpRenameInProject Path/To/NewFileName.cs
 ```

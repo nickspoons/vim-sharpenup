@@ -8,6 +8,7 @@ command! -buffer SharpenUpAddToProject call sharpenup#legacycsproj#AddToProject(
 command! -buffer -nargs=1 SharpenUpRenameInProject call sharpenup#legacycsproj#RenameInProject(<q-args>)
 
 nnoremap <buffer> <Plug>(sharpenup_add_to_csproj) :call sharpenup#legacycsproj#AddToProject()<CR>
+nnoremap <buffer> <Plug>(sharpenup_rename_in_csproj) :call sharpenup#legacycsproj#RenameInProjectPopulate()<CR>
 
 function! s:map(mode, lhs, plug) abort
   let l:rhs = '<Plug>(' . a:plug . ')'
@@ -59,9 +60,7 @@ endif
 
 if get(g:, 'sharpenup_map_legacy_csproj_actions', 1)
   call s:map('n', s:pre . 'xa', 'sharpenup_add_to_csproj')
-  if maparg(s:pre . 'xr', 'n') ==# ''
-    execute 'nnoremap <buffer>' s:pre . 'xr :SharpenUpRenameInProject<Space>'
-  endif
+  call s:map('n', s:pre . 'xr', 'sharpenup_rename_in_csproj')
 endif
 
 if g:sharpenup_codeactions
