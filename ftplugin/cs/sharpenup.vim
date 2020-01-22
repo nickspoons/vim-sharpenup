@@ -58,9 +58,9 @@ if get(g:, 'sharpenup_create_mappings', 1)
 endif
 
 if get(g:, 'sharpenup_map_legacy_csproj_actions', 1)
-  call s:map('n', s:pre . 'add', 'sharpenup_add_to_csproj')
-  if maparg(s:pre . 'ren', 'n') ==# ''
-    execute 'nnoremap <buffer>' s:pre . 'ren :SharpenUpRenameInProject<Space>'
+  call s:map('n', s:pre . 'xa', 'sharpenup_add_to_csproj')
+  if maparg(s:pre . 'xr', 'n') ==# ''
+    execute 'nnoremap <buffer>' s:pre . 'xr :SharpenUpRenameInProject<Space>'
   endif
 endif
 

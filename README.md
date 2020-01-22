@@ -131,52 +131,43 @@ This can be globally disabled like this:
 let g:sharpenup_create_mappings = 0
 ```
 
-The full list of default mappings is as follows:
-
-```vim
-nmap <silent> <buffer> gd <Plug>(omnisharp_go_to_definition)
-nmap <silent> <buffer> <LocalLeader>osfu <Plug>(omnisharp_find_usages)
-nmap <silent> <buffer> <LocalLeader>osfi <Plug>(omnisharp_find_implementations)
-nmap <silent> <buffer> <LocalLeader>ospd <Plug>(omnisharp_preview_definition)
-nmap <silent> <buffer> <LocalLeader>ospi <Plug>(omnisharp_preview_implementations)
-
-nmap <silent> <buffer> <LocalLeader>ost <Plug>(omnisharp_type_lookup)
-nmap <silent> <buffer> <LocalLeader>osd <Plug>(omnisharp_documentation)
-
-nmap <silent> <buffer> <LocalLeader>osfs <Plug>(omnisharp_find_symbol)
-
-nmap <silent> <buffer> <LocalLeader>osfx <Plug>(omnisharp_fix_usings)
-nmap <silent> <buffer> <C-\> <Plug>(omnisharp_signature_help)
-imap <silent> <buffer> <C-\> <Plug>(omnisharp_signature_help)
-
-nmap <silent> <buffer> [[ <Plug>(omnisharp_navigate_up)
-nmap <silent> <buffer> ]] <Plug>(omnisharp_navigate_down)
-
-nmap <silent> <buffer> <LocalLeader>osgcc <Plug>(omnisharp_global_code_check)
-
-nmap <silent> <buffer> <LocalLeader>osca <Plug>(omnisharp_code_actions)
-xmap <silent> <buffer> <LocalLeader>osca <Plug>(omnisharp_code_actions)
-
-nmap <silent> <buffer> <LocalLeader>osnm <Plug>(omnisharp_rename)
-
-nmap <silent> <buffer> <LocalLeader>os= <Plug>(omnisharp_code_format)
-
-nmap <silent> <buffer> <LocalLeader>osre <Plug>(omnisharp_restart_server)
-nmap <silent> <buffer> <LocalLeader>osst <Plug>(omnisharp_start_server)
-nmap <silent> <buffer> <LocalLeader>ossp <Plug>(omnisharp_stop_server)
-```
-
 The mappings all use a common prefix, except for these exceptions: `gd`, `<C-\>`, `[[`, `]]`
 
+The full list of mappings is as follows:
+
+| Action                | LHS        | Full default mapping                                                               |
+|-----------------------|------------|------------------------------------------------------------------------------------|
+|Go to definition       |`gd`        |`nmap <silent> <buffer> gd <Plug>(omnisharp_go_to_definition)`                      |
+|Find usages            |prefix+`fu` |`nmap <silent> <buffer> <LocalLeader>osfu <Plug>(omnisharp_find_usages)`            |
+|Find implementations   |prefix+`fi` |`nmap <silent> <buffer> <LocalLeader>osfi <Plug>(omnisharp_find_implementations)`   |
+|Preview definition     |prefix+`pe` |`nmap <silent> <buffer> <LocalLeader>ospd <Plug>(omnisharp_preview_definition)`     |
+|Preview implementations|prefix+`pi` |`nmap <silent> <buffer> <LocalLeader>ospi <Plug>(omnisharp_preview_implementations)`|
+|Type lookup            |prefix+`t`  |`nmap <silent> <buffer> <LocalLeader>ost <Plug>(omnisharp_type_lookup)`             |
+|Show documentation     |prefix+`d`  |`nmap <silent> <buffer> <LocalLeader>osd <Plug>(omnisharp_documentation)`           |
+|Find symbol            |prefix+`fs` |`nmap <silent> <buffer> <LocalLeader>osfs <Plug>(omnisharp_find_symbol)`            |
+|Fix usings             |prefix+`fx` |`nmap <silent> <buffer> <LocalLeader>osfx <Plug>(omnisharp_fix_usings)`             |
+|Signature help (normal)|`<C-\>`     |`nmap <silent> <buffer> <C-\> <Plug>(omnisharp_signature_help)`                     |
+|Signature help (insert)|`<C-\>`     |`imap <silent> <buffer> <C-\> <Plug>(omnisharp_signature_help)`                     |
+|Navigate up            |`[[`        |`nmap <silent> <buffer> [[ <Plug>(omnisharp_navigate_up)`                           |
+|Navigate down          |`]]`        |`nmap <silent> <buffer> ]] <Plug>(omnisharp_navigate_down)`                         |
+|Global code check      |prefix+`gcc`|`nmap <silent> <buffer> <LocalLeader>osgcc <Plug>(omnisharp_global_code_check)`     |
+|Code actions (normal)  |prefix+`ca` |`nmap <silent> <buffer> <LocalLeader>osca <Plug>(omnisharp_code_actions)`           |
+|Code actions (visual)  |prefix+`ca` |`xmap <silent> <buffer> <LocalLeader>osca <Plug>(omnisharp_code_actions)`           |
+|Rename                 |prefix+`nm` |`nmap <silent> <buffer> <LocalLeader>osnm <Plug>(omnisharp_rename)`                 |
+|Code format            |prefix+`=`  |`nmap <silent> <buffer> <LocalLeader>os= <Plug>(omnisharp_code_format)`             |
+|Restart server         |prefix+`re` |`nmap <silent> <buffer> <LocalLeader>osre <Plug>(omnisharp_restart_server)`         |
+|Start server           |prefix+`st` |`nmap <silent> <buffer> <LocalLeader>osst <Plug>(omnisharp_start_server)`           |
+|Stop server            |prefix+`sp` |`nmap <silent> <buffer> <LocalLeader>ossp <Plug>(omnisharp_stop_server)`            |
+
 The default prefix is `<LocalLeader>os`.
-The default local-leader in Vim is `\` which means that the default prefixed mappings all begin with `\os`.
+Vim's default local-leader is `\` which means that the default prefixed mappings all begin with `\os`.
 This can be overridden either by changing `maplocalleader`, or setting a different prefix:
 
 ```vim
-" Example mapping: '<Space>osfi'
+" Creates “Find implementations” mapping: '<Space>osfi'
 let maplocalleader = "\<Space>"
 
-" Example mapping: ',fi'
+" Creates “Find implementations” mapping: ',fi'
 let g:sharpenup_map_prefix = ','
 ```
 
@@ -192,9 +183,13 @@ The following commands are provided:
 
 When the `g:sharpenup_map_legacy_csproj_actions` flag is set (it is by default), the following mappings are also created (note that the `g:sharpenup_map_prefix` is used, see [mappings](#mappings)):
 
-```vim
-nmap <silent> <buffer> <LocalLeader>osadd <Plug>(sharpenup_add_to_csproj)
-" Populate the vim command line with the command, waiting for user input:
-" :SharpenUpRenameInProject _
-nnoremap <buffer> <LocalLeader>osren :SharpenUpRenameInProject<Space>
+| Action                | LHS        | Full default mapping                                                               |
+|-----------------------|------------|------------------------------------------------------------------------------------|
+|Add file to .csproj    |prefix+`xa` |`nmap <silent> <buffer> <LocalLeader>osxa <Plug>(sharpenup_add_to_csproj)`          |
+|Rename file in .csproj |prefix+`xr` |`nnoremap <buffer> <LocalLeader>osxr :SharpenUpRenameInProject<Space>`              |
+
+The mapping to rename a file in the .csproj file populates the vim command line with the `:SharpenUpRenameInProject` command, and is used like this:
+
+```sh
+:SharpenUpRenameInProject NewFileName.cs
 ```
