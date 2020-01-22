@@ -219,7 +219,7 @@ function! MoveAfterProjectRename(newname, oldname, project_dir)
 endfunction
 ```
 
-Here's an example that makes use of [vim-eunuch](https://github.com/tpope/vim-eunuch)'s `:Move` command, which takes care of most of the details in the previous example:
+Here's an example that makes use of [vim-eunuch](https://github.com/tpope/vim-eunuch)'s `:Move` command, which takes care of most of the details in the previous example and is OS-agnostic:
 
 ```vim
 function! MoveAfterProjectRename(newname, oldname, project_dir)

@@ -66,8 +66,10 @@ function! sharpenup#legacycsproj#RenameInProject(newname) abort
   endif
   let l:filepath = fnamemodify(l:filepath, ':.')
   let l:oldname = l:filepath
-  if g:OmniSharp_translate_cygwin_wsl || has('win32')
+  if g:OmniSharp_translate_cygwin_wsl
     let l:filepath = substitute(l:filepath, '/', '\\\\', 'g')
+  elseif has('win32')
+    let l:filepath = substitute(l:filepath, '\\', '\\\\', 'g')
   endif
   " Search for the full file path, relative to the .csproj
   if !search(l:filepath, '')
@@ -76,8 +78,10 @@ function! sharpenup#legacycsproj#RenameInProject(newname) abort
     return
   endif
   let l:newpath = a:newname
-  if g:OmniSharp_translate_cygwin_wsl || has('win32')
+  if g:OmniSharp_translate_cygwin_wsl
     let l:newpath = substitute(a:newname, '/', '\\\\', 'g')
+  elseif has('win32')
+    let l:newpath = substitute(a:newname, '\\', '\\\\', 'g')
   endif
   execute 'substitute?' . l:filepath . '?' . l:newpath . '?'
   silent write
