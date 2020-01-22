@@ -11,8 +11,6 @@ let g:sharpenup_codeactions_glyph =
 \ get(g:, 'sharpenup_codeactions_glyph', '💡')
 let g:sharpenup_codeactions_set_signcolumn =
 \ get(g:, 'sharpenup_codeactions_set_signcolumn', 1)
-let g:sharpenup_legacy_csproj_actions =
-\ get(g:, 'sharpenup_legacy_csproj_actions', 1)
 
 if g:sharpenup_codeactions
   execute 'sign define sharpenup_CodeActions text=' .
