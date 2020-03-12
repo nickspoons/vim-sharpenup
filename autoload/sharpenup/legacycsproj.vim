@@ -31,10 +31,12 @@ function! sharpenup#legacycsproj#AddToProject() abort
   let l:filepath = expand('%:p')
   let l:project = s:FindProject()
   if !len(l:project) | return | endif
+  let l:currenttab = tabpagenr()
   execute 'silent tabedit' l:project
   call cursor(1, 1)
   if !search('^\s*<compile include=".*\.cs"', '')
     tabclose
+    execute 'tabnext' l:currenttab
     call s:HiEcho('Could not find a .cs entry')
     return
   endif
@@ -50,6 +52,7 @@ function! sharpenup#legacycsproj#AddToProject() abort
   endif
   silent write
   tabclose
+  execute 'tabnext' l:currenttab
 endfunction
 
 " Find the current file in the .csproj file and rename it to a:newname.
@@ -58,6 +61,7 @@ function! sharpenup#legacycsproj#RenameInProject(newname) abort
   let l:filepath = expand('%:p')
   let l:project = s:FindProject()
   if !len(l:project) | return | endif
+  let l:currenttab = tabpagenr()
   execute 'silent tabedit' l:project
   call cursor(1, 1)
   let l:project_dir = fnamemodify(l:project, ':h')
@@ -74,6 +78,7 @@ function! sharpenup#legacycsproj#RenameInProject(newname) abort
   " Search for the full file path, relative to the .csproj
   if !search(l:filepath, '')
     tabclose
+    execute 'tabnext' l:currenttab
     call s:HiEcho('Could not find ' . substitute(l:filepath, '\\\\', '\\', 'g'))
     return
   endif
@@ -86,6 +91,7 @@ function! sharpenup#legacycsproj#RenameInProject(newname) abort
   execute 'substitute?' . l:filepath . '?' . l:newpath . '?'
   silent write
   tabclose
+  execute 'tabnext' l:currenttab
   if get(g:, 'sharpenup_legacy_csproj_rename_callback', '') !=# ''
     try
       let CB = function(g:sharpenup_legacy_csproj_rename_callback)
@@ -104,6 +110,7 @@ function! sharpenup#legacycsproj#RenameInProjectPopulate() abort
   let l:filepath = expand('%:p')
   let l:project = s:FindProject()
   if !len(l:project) | return | endif
+  let l:currenttab = tabpagenr()
   execute 'silent tabedit' l:project
   call cursor(1, 1)
   if fnamemodify(l:project, ':h') !=# getcwd()
@@ -111,5 +118,6 @@ function! sharpenup#legacycsproj#RenameInProjectPopulate() abort
   endif
   let l:filepath = fnamemodify(l:filepath, ':.')
   tabclose
+  execute 'tabnext' l:currenttab
   call feedkeys(':SharpenUpRenameInProject ' . l:filepath, 'n')
 endfunction
