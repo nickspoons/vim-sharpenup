@@ -97,6 +97,9 @@ When using [lightline.vim](https://github.com/itchyny/lightline.vim) you can als
 Here's an example:
 
 ```vim
+" Ensure that `g:sharpenup_statusline_opts` is set _before_
+" `sharpenup#statusline#Build()` is called
+let g:sharpenup_statusline_opts = { 'Highlight': 0 }
 let g:lightline = {
 \ 'active': {
 \   'right': [['lineinfo'], ['percent'], ['fileformat', 'fileencoding', 'filetype', 'sharpenup']]
@@ -108,7 +111,6 @@ let g:lightline = {
 \   'sharpenup': sharpenup#statusline#Build()
 \ }
 \}
-let g:sharpenup_statusline_opts = { 'Highlight': 0 }
 ```
 
 Highlighting has been disabled in `g:sharpenup_statusline_opts` in this example, meaning that the default statusline texts will be displayed ("O#: Loading...", "O#", "O#: Not running") in the statusline colours.
