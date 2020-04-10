@@ -89,13 +89,13 @@ function! s:StatusInit() abort
       let s:statusOpts.TextDead = gs
     elseif type(gs) == type({})
       if has_key(gs, 'TextLoading') || has_key(gs, 'Text')
-        let s:statusOpts.TextLoading = get(gs, 'TextLoading', gs.Text)
+        let s:statusOpts.TextLoading = get(gs, 'TextLoading', get(gs, 'Text'))
       endif
       if has_key(gs, 'TextReady') || has_key(gs, 'Text')
-        let s:statusOpts.TextReady = get(gs, 'TextReady', gs.Text)
+        let s:statusOpts.TextReady = get(gs, 'TextReady', get(gs, 'Text'))
       endif
       if has_key(gs, 'TextDead') || has_key(gs, 'Text')
-        let s:statusOpts.TextDead = get(gs, 'TextDead', gs.Text)
+        let s:statusOpts.TextDead = get(gs, 'TextDead', get(gs, 'Text'))
       endif
       if !get(gs, 'Highlight', 1)
         let s:statusOpts.Highlight = 0
