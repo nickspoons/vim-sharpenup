@@ -1,3 +1,6 @@
+let s:save_cpo = &cpoptions
+set cpoptions&vim
+
 function! s:HiEcho(message, ...) abort
   let group = a:0 ? a:1 : 'WarningMsg'
   execute 'echohl ' . group
@@ -121,3 +124,8 @@ function! sharpenup#legacycsproj#RenameInProjectPopulate() abort
   execute 'tabnext' l:currenttab
   call feedkeys(':SharpenUpRenameInProject ' . l:filepath, 'n')
 endfunction
+
+let &cpoptions = s:save_cpo
+unlet s:save_cpo
+
+" vim:et:sw=2:sts=2

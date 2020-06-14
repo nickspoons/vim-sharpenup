@@ -1,3 +1,6 @@
+let s:save_cpo = &cpoptions
+set cpoptions&vim
+
 function! sharpenup#codeactions#Count() abort
   let opts = {
   \ 'CallbackCount': function('sharpenup#codeactions#CBReturnCount'),
@@ -12,5 +15,8 @@ function! sharpenup#codeactions#CBReturnCount(count) abort
     \ 'name=sharpenup_CodeActions file=' . expand('%:p')
   endif
 endfunction
+
+let &cpoptions = s:save_cpo
+unlet s:save_cpo
 
 " vim:et:sw=2:sts=2

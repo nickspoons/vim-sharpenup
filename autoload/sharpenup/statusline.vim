@@ -1,3 +1,6 @@
+let s:save_cpo = &cpoptions
+set cpoptions&vim
+
 let s:t_ignore = -1
 let s:t_loading = 0
 let s:t_ready = 1
@@ -112,5 +115,8 @@ function! s:StatusInit() abort
     endif
   endif
 endfunction
+
+let &cpoptions = s:save_cpo
+unlet s:save_cpo
 
 " vim:et:sw=2:sts=2

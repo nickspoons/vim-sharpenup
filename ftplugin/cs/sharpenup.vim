@@ -4,6 +4,9 @@ let b:undo_ftplugin = get(b:, 'undo_ftplugin', 'exe')
 let b:sharpenup_ftplugin_loaded = 1
 let b:undo_ftplugin .= '| unlet b:sharpenup_ftplugin_loaded'
 
+let s:save_cpo = &cpoptions
+set cpoptions&vim
+
 command! -buffer SharpenUpAddToProject call sharpenup#legacycsproj#AddToProject()
 command! -buffer -nargs=1 SharpenUpRenameInProject call sharpenup#legacycsproj#RenameInProject(<q-args>)
 
@@ -78,5 +81,8 @@ if g:sharpenup_codeactions
 
   let b:undo_ftplugin .= '| execute "autocmd! sharpenup_ftplugin * <buffer>"'
 endif
+
+let &cpoptions = s:save_cpo
+unlet s:save_cpo
 
 " vim:et:sw=2:sts=2
