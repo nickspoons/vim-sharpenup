@@ -3,7 +3,7 @@ function! sharpenup#codeactions#Count() abort
   \ 'CallbackCount': function('sharpenup#codeactions#CBReturnCount'),
   \ 'CallbackCleanup': {-> execute('sign unplace 99')}
   \}
-  call OmniSharp#CountCodeActions(opts)
+  call OmniSharp#actions#codeactions#Count(opts)
 endfunction
 
 function! sharpenup#codeactions#CBReturnCount(count) abort
