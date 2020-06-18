@@ -20,7 +20,7 @@ function! sharpenup#statusline#GetStatus() abort
   endif
 
   let host = getbufvar(bufnr('%'), 'OmniSharp_host')
-  let job = empty(host) ? '' :  OmniSharp#proc#GetJob(host.sln_or_dir)
+  let job = empty(host) ? '' : OmniSharp#proc#GetJob(host.sln_or_dir)
   if type(job) != v:t_dict
     let status.State = s:t_dead
     let status.Text = substitute(s:statusOpts.TextDead, '%s', '-', 'g')
@@ -33,6 +33,12 @@ function! sharpenup#statusline#GetStatus() abort
   if stridx(status.Text, '%s') >= 0
     let sod = fnamemodify(host.sln_or_dir, ':t')
     let status.Text = substitute(status.Text, '%s', sod, 'g')
+  endif
+  if match(status.Text, '%p\c') >= 0
+    let projectsloaded = OmniSharp#project#CountLoaded()
+    let projectstotal = OmniSharp#project#CountTotal()
+    let status.Text = substitute(status.Text, '%p\C', projectsloaded, 'g')
+    let status.Text = substitute(status.Text, '%P\C', projectstotal, 'g')
   endif
   return status
 endfunction
