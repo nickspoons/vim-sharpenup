@@ -19,15 +19,14 @@ function! sharpenup#statusline#GetStatus() abort
     return status
   endif
 
-  let host = getbufvar(bufnr('%'), 'OmniSharp_host')
-  let job = empty(host) ? '' : OmniSharp#proc#GetJob(host.sln_or_dir)
-  if type(job) != v:t_dict
+  let host = OmniSharp#GetHost(bufnr('%'))
+  if type(host.job) != v:t_dict || get(host.job, 'stopped')
     let status.State = s:t_dead
     let status.Text = substitute(s:statusOpts.TextDead, '%s', '-', 'g')
     return status
   endif
 
-  let loaded = get(job, 'loaded', 0)
+  let loaded = get(host.job, 'loaded', 0)
   let status.State = loaded ? s:t_ready : s:t_loading
   let status.Text = loaded ? s:statusOpts.TextReady : s:statusOpts.TextLoading
   if stridx(status.Text, '%s') >= 0
@@ -35,8 +34,15 @@ function! sharpenup#statusline#GetStatus() abort
     let status.Text = substitute(status.Text, '%s', sod, 'g')
   endif
   if match(status.Text, '%p\c') >= 0
-    let projectsloaded = OmniSharp#project#CountLoaded()
-    let projectstotal = OmniSharp#project#CountTotal()
+    try
+      let projectsloaded = OmniSharp#project#CountLoaded()
+      let projectstotal = OmniSharp#project#CountTotal()
+    catch
+      " The CountLoaded and CountTotal functions are very new - catch the error
+      " when they don't exist
+      let projectsloaded = 0
+      let projectstotal = 0
+    endtry
     let status.Text = substitute(status.Text, '%p\C', projectsloaded, 'g')
     let status.Text = substitute(status.Text, '%P\C', projectstotal, 'g')
   endif
