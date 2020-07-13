@@ -87,8 +87,8 @@ function! s:StatusInit() abort
 
   " Setup for first use
   let s:statusOpts = {
-  \ 'TextLoading': ' O#: Loading... ',
-  \ 'TextReady': ' O# ',
+  \ 'TextLoading': ' O#: %s loading... (%p of %P) ',
+  \ 'TextReady': ' O#: %s ',
   \ 'TextDead': ' O#: Not running ',
   \ 'Highlight': 1,
   \ 'HiLoading': 'SharpenUpLoading',

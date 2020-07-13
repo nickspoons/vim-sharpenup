@@ -26,6 +26,22 @@ A flag is displayed in the sign column to indicate that one or more code actions
 
 The status of the current OmniSharp server can be added to your statusline using SharpenUp helper functions.
 The statusline flag can be particularly useful when working with multiple solutions in a single Vim session, as each buffer shows the status of the solution the buffer belongs to.
+It is also useful as an indicator of how many projects of a large solution have been loaded so far.
+
+Default:
+
+![sharpenup_stl_loading_default_light](https://user-images.githubusercontent.com/5274565/87356346-06fa2d00-c5b6-11ea-91e6-ed89901d7afa.png)
+![sharpenup_stl_loaded_default_light](https://user-images.githubusercontent.com/5274565/87356354-0a8db400-c5b6-11ea-84a3-54a05b6ba119.png)
+
+Customised:
+
+![sharpenup_stl_loading_custom_light](https://user-images.githubusercontent.com/5274565/87356360-0d88a480-c5b6-11ea-94be-1b6d805c1c82.png)
+![sharpenup_stl_loaded_custom_light](https://user-images.githubusercontent.com/5274565/87356367-0feafe80-c5b6-11ea-9d9a-28ea72e45b61.png)
+
+Integrated in lightline.vim:
+
+![sharpenup_stl_loading_lightline_light](https://user-images.githubusercontent.com/5274565/87356379-137e8580-c5b6-11ea-9b47-b741a673fae4.png)
+
 
 **Note:** The statusline function does not support the HTTP server, Stdio only.
 
@@ -37,8 +53,8 @@ The defaults are as follows:
 
 ```vim
 let g:sharpenup_statusline_opts = {
-\ 'TextLoading': ' O#: Loading... ',
-\ 'TextReady': ' O# ',
+\ 'TextLoading': ' O#: %s loading... (%p of %P) ',
+\ 'TextReady': ' O#: %s ',
 \ 'TextDead': ' O#: Not running ',
 \ 'Highlight': 1,
 \ 'HiLoading': 'SharpenUpLoading',
@@ -47,19 +63,20 @@ let g:sharpenup_statusline_opts = {
 \}
 ```
 
+The following special items can be included:
+
+|      |                                                                         |
+|------|-------------------------------------------------------------------------|
+| `%s` | Solution/directory name of OmniSharp server associated with this buffer |
+| `%P` | Total number of projects in this solution                               |
+| `%p` | Number of projects loaded so far                                        |
+
 The texts can be set individually, or using property `Text`.
 A shortcut is to simply assign a text value to `g:sharpenup_statusline_opts`, which is equivalent to only setting the `Text` property:
 
 ```vim
 " Use a single glyph in the statusline, and allow the highlight groups to indicate server status
 let g:sharpenup_statusline_opts = '•'
-```
-
-To display the solution/directory name of the current OmniSharp server, use
-`%s`, e.g.:
-
-```vim
-let g:sharpenup_statusline_opts = ' O# (%s) '
 ```
 
 To change the highlight colours, either:
@@ -123,6 +140,10 @@ augroup lightline_integration
   autocmd User OmniSharpStarted,OmniSharpReady,OmniSharpStopped call lightline#update()
 augroup END
 ```
+
+#### Airline
+
+[vim-airline](https://github.com/vim-airline/vim-airline) has OmniSharp-vim integration built-in - no vim-sharpenup integration is necessary.
 
 ## Mappings
 
