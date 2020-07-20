@@ -48,6 +48,8 @@ if get(g:, 'sharpenup_create_mappings', 1)
 
   call s:map('n', s:pre . 'ca', 'omnisharp_code_actions')
   call s:map('x', s:pre . 'ca', 'omnisharp_code_actions')
+  call s:map('n', s:pre . '.', 'omnisharp_code_action_repeat')
+  call s:map('x', s:pre . '.', 'omnisharp_code_action_repeat')
 
   call s:map('n', s:pre . 'nm', 'omnisharp_rename')
 
