@@ -158,8 +158,8 @@ The mappings all use a common prefix, except for these exceptions: `gd`, `<C-\>`
 
 The full list of mappings is as follows:
 
-|Action                 |LHS         |Full default mapping                                                                           |
-|-----------------------|------------|-----------------------------------------------------------------------------------------------|
+|Action                            |LHS         |Full default mapping                                                                |
+|----------------------------------|------------|------------------------------------------------------------------------------------|
 |Go to definition                  |`gd`        |`nmap <silent> <buffer> gd <Plug>(omnisharp_go_to_definition)`                      |
 |Find usages                       |prefix+`fu` |`nmap <silent> <buffer> <LocalLeader>osfu <Plug>(omnisharp_find_usages)`            |
 |Find implementations              |prefix+`fi` |`nmap <silent> <buffer> <LocalLeader>osfi <Plug>(omnisharp_find_implementations)`   |
@@ -168,6 +168,7 @@ The full list of mappings is as follows:
 |Type lookup                       |prefix+`t`  |`nmap <silent> <buffer> <LocalLeader>ost <Plug>(omnisharp_type_lookup)`             |
 |Show documentation                |prefix+`d`  |`nmap <silent> <buffer> <LocalLeader>osd <Plug>(omnisharp_documentation)`           |
 |Find symbol                       |prefix+`fs` |`nmap <silent> <buffer> <LocalLeader>osfs <Plug>(omnisharp_find_symbol)`            |
+|Find type                         |prefix+`ft` |`nmap <silent> <buffer> <LocalLeader>osft <Plug>(omnisharp_find_type)`              |
 |Fix usings                        |prefix+`fx` |`nmap <silent> <buffer> <LocalLeader>osfx <Plug>(omnisharp_fix_usings)`             |
 |Signature help (normal)           |`<C-\>`     |`nmap <silent> <buffer> <C-\> <Plug>(omnisharp_signature_help)`                     |
 |Signature help (insert)           |`<C-\>`     |`imap <silent> <buffer> <C-\> <Plug>(omnisharp_signature_help)`                     |

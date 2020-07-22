@@ -34,8 +34,10 @@ if get(g:, 'sharpenup_create_mappings', 1)
   call s:map('n', s:pre . 'd', 'omnisharp_documentation')
 
   call s:map('n', s:pre . 'fs', 'omnisharp_find_symbol')
+  call s:map('n', s:pre . 'ft', 'omnisharp_find_type')
 
   call s:map('n', s:pre . 'fx', 'omnisharp_fix_usings')
+
   call s:map('n', '<C-\>', 'omnisharp_signature_help')
   call s:map('i', '<C-\>', 'omnisharp_signature_help')
 
