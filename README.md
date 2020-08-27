@@ -163,7 +163,7 @@ The full list of mappings is as follows:
 |Go to definition                  |`gd`        |`nmap <silent> <buffer> gd <Plug>(omnisharp_go_to_definition)`                      |
 |Find usages                       |prefix+`fu` |`nmap <silent> <buffer> <LocalLeader>osfu <Plug>(omnisharp_find_usages)`            |
 |Find implementations              |prefix+`fi` |`nmap <silent> <buffer> <LocalLeader>osfi <Plug>(omnisharp_find_implementations)`   |
-|Preview definition                |prefix+`pe` |`nmap <silent> <buffer> <LocalLeader>ospd <Plug>(omnisharp_preview_definition)`     |
+|Preview definition                |prefix+`pd` |`nmap <silent> <buffer> <LocalLeader>ospd <Plug>(omnisharp_preview_definition)`     |
 |Preview implementations           |prefix+`pi` |`nmap <silent> <buffer> <LocalLeader>ospi <Plug>(omnisharp_preview_implementations)`|
 |Type lookup                       |prefix+`t`  |`nmap <silent> <buffer> <LocalLeader>ost <Plug>(omnisharp_type_lookup)`             |
 |Show documentation                |prefix+`d`  |`nmap <silent> <buffer> <LocalLeader>osd <Plug>(omnisharp_documentation)`           |
