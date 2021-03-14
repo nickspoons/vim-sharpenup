@@ -10,9 +10,13 @@ function! sharpenup#codeactions#Count() abort
 endfunction
 
 function! sharpenup#codeactions#CBReturnCount(count) abort
+  let file = expand('%:p')
+  if empty(file)
+    return
+  endif
   if a:count
     execute 'sign place 99 line=' . line('.')
-    \ 'name=sharpenup_CodeActions file=' . expand('%:p')
+    \ 'name=sharpenup_CodeActions file=' . file
   endif
 endfunction
 
