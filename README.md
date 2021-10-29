@@ -184,6 +184,9 @@ The full list of mappings is as follows:
 |Restart server                    |prefix+`re` |`nmap <silent> <buffer> <LocalLeader>osre <Plug>(omnisharp_restart_server)`         |
 |Start server                      |prefix+`st` |`nmap <silent> <buffer> <LocalLeader>osst <Plug>(omnisharp_start_server)`           |
 |Stop server                       |prefix+`sp` |`nmap <silent> <buffer> <LocalLeader>ossp <Plug>(omnisharp_stop_server)`            |
+|Run test under cursor             |prefix+`rt` |`nmap <silent> <buffer> <LocalLeader>osrt <Plug>(omnisharp_run_test)`               |
+|Run all tests in file             |prefix+`rat`|`nmap <silent> <buffer> <LocalLeader>osrat <Plug>(omnisharp_run_tests_in_file)`     |
+|Debug test under cursor           |prefix+`rdt` |`nmap <silent> <buffer> <LocalLeader>osrdt <Plug>(omnisharp_debug_test)`           |
 
 The default prefix is `<LocalLeader>os`.
 Vim's default local-leader is `\` which means that the default prefixed mappings all begin with `\os`.
