@@ -62,8 +62,11 @@ if get(g:, 'sharpenup_create_mappings', 1)
   call s:map('n', s:pre . 'sp', 'omnisharp_stop_server')
 
   call s:map('n', s:pre . 'rt', 'omnisharp_run_test')
+  call s:map('n', s:pre . 'rnt', 'omnisharp_run_test_no_build')
   call s:map('n', s:pre . 'rat', 'omnisharp_run_tests_in_file')
+  call s:map('n', s:pre . 'rant', 'omnisharp_run_tests_in_file_no_build')
   call s:map('n', s:pre . 'rdt', 'omnisharp_debug_test')
+  call s:map('n', s:pre . 'rdnt', 'omnisharp_debug_test_no_build')
 endif
 
 if get(g:, 'sharpenup_map_legacy_csproj_actions', 1)
