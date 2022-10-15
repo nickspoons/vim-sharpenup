@@ -10,6 +10,10 @@ function! sharpenup#codeactions#Count() abort
 endfunction
 
 function! sharpenup#codeactions#CBReturnCount(count) abort
+  if &buftype == "terminal"
+    return
+  endif
+
   let file = expand('%:p')
   if a:count && !empty(file)
     execute 'sign place 99 line=' . line('.')
