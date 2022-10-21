@@ -3,21 +3,16 @@ set cpoptions&vim
 
 function! sharpenup#codeactions#Count() abort
   let opts = {
-  \ 'CallbackCount': function('sharpenup#codeactions#CBReturnCount'),
+  \ 'CallbackCount': function('s:CBReturnCount', [bufnr(), line('.')]),
   \ 'CallbackCleanup': {-> execute('sign unplace 99')}
   \}
   call OmniSharp#actions#codeactions#Count(opts)
 endfunction
 
-function! sharpenup#codeactions#CBReturnCount(count) abort
-  if &buftype == "terminal"
-    return
-  endif
-
-  let file = expand('%:p')
-  if a:count && !empty(file)
-    execute 'sign place 99 line=' . line('.')
-    \ 'name=sharpenup_CodeActions file=' . file
+function! s:CBReturnCount(bufnr, line, count) abort
+  if a:count
+    execute 'sign place 99 line=' . a:line
+    \ 'name=sharpenup_CodeActions file=' . bufname(a:bufnr)
   endif
 endfunction
 
