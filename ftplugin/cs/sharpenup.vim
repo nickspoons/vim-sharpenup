@@ -25,6 +25,7 @@ let s:pre = get(g:, 'sharpenup_map_prefix', "\<LocalLeader>os")
 
 if get(g:, 'sharpenup_create_mappings', 1)
   call s:map('n', 'gd', 'omnisharp_go_to_definition')
+  call s:map('n', s:pre . 'gt', 'omnisharp_go_to_type_definition')
   call s:map('n', s:pre . 'fu', 'omnisharp_find_usages')
   call s:map('n', s:pre . 'fi', 'omnisharp_find_implementations')
   call s:map('n', s:pre . 'pd', 'omnisharp_preview_definition')

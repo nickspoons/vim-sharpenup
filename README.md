@@ -161,6 +161,7 @@ The full list of mappings is as follows:
 |Action                            |LHS          |Full default mapping                                                                     |
 |----------------------------------|-------------|-----------------------------------------------------------------------------------------|
 |Go to definition                  |`gd`         |`nmap <silent> <buffer> gd <Plug>(omnisharp_go_to_definition)`                           |
+|Go to type definition             |prefix+`gt`  |`nmap <silent> <buffer> <LocalLeader>osgt <Plug>(omnisharp_go_to_type_definition)`       |
 |Find usages                       |prefix+`fu`  |`nmap <silent> <buffer> <LocalLeader>osfu <Plug>(omnisharp_find_usages)`                 |
 |Find implementations              |prefix+`fi`  |`nmap <silent> <buffer> <LocalLeader>osfi <Plug>(omnisharp_find_implementations)`        |
 |Preview definition                |prefix+`pd`  |`nmap <silent> <buffer> <LocalLeader>ospd <Plug>(omnisharp_preview_definition)`          |
